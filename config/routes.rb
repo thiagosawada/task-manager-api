@@ -1,3 +1,5 @@
+require 'api_version_constraint' # Tá na pasta lib
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -13,5 +15,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json }, constraints: { subdomain: 'api' }, path: "/" do
 
+    namespace :v1, path: "/", constraints: ApiVersionConstraint.new(version: 1, default: true) do
+
+    end
   end
 end
