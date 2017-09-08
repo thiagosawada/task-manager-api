@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Configurações constraints
   # Para acessar os controles é preciso passar o subdomínio api. Com isso, a URL passa a ser api.site.com/api/
 
-  # O path: "/" elimina o caminho o /api. Agora fica api.site.com
+  # O path: "/" elimina o caminho o /api. Agora a URL fica assim: api.site.com
 
   namespace :api, defaults: { format: :json }, constraints: { subdomain: 'api' }, path: "/" do
 
