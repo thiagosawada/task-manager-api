@@ -14,6 +14,7 @@ RSpec.describe User, type: :model do
   ###################
 
   # subject = User.new
+
   # build(:user) = FactoryGirl.build(:user) -> Config em rails_helper.rb
   # subject { build(:user) }
 
@@ -29,21 +30,21 @@ RSpec.describe User, type: :model do
   let(:user) { build(:user) }
   it { expect(user).to respond_to(:email) }
 
-  # context "when name is blank" do
+  # context 'when name is blank' do
   #   # before(:each) -> executar o bloco antes de cada teste. Este é o valor default
   #   # before(:all) -> executar o bloco antes de todos os outros testes
-  #   before { user.name = "" }
+  #   before { user.name = '' }
 
   #   it { expect(user).not_to be_valid }
   # end
 
-  # context "when name is nil" do
+  # context 'when name is nil' do
   #   before { user.name = nil }
 
   #   it { expect(user).not_to be_valid }
   # end
 
-  # Com a gem shoulda_matchers
+  # => # Com a gem shoulda_matchers
 
   # it { is_expected.to validate_presence_of(:name) }
   # # É o mesmo que:
@@ -55,7 +56,7 @@ RSpec.describe User, type: :model do
   # Validar confirmação da senha
   it { is_expected.to validate_confirmation_of(:password) }
   # Validar formato de email
-  it { is_expected.to allow_value("email@email.com").for(:email) }
+  it { is_expected.to allow_value('email@email.com').for(:email) }
 
 
 end
