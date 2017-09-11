@@ -27,8 +27,9 @@ RSpec.describe 'Users API', type: :request do
 
     context 'when user exists' do
       it 'returns the user' do
-        user_response = JSON.parse(response.body) # Transforma em um hash
-        expect(user_response['id']).to eq(user_id)
+        # symbolize_names: true faz com que as chaves da requisição sejam convertidas de string para symbol
+        user_response = JSON.parse(response.body, symbolize_names: true) # Transforma em um hash
+        expect(user_response[:id]).to eq(user_id) # Antes do 'symbolize_names: true' era user_response['id']
       end
 
       it 'returns status 200' do
@@ -66,8 +67,8 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns json data for the created user' do
-        user_response = JSON.parse(response.body)
-        expect(user_response['email']).to eq(user_params[:email])
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:email]).to eq(user_params[:email])
       end
     end
 
@@ -80,8 +81,8 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'return the json data for the errors' do
-        user_response = JSON.parse(response.body)
-        expect(user_response).to have_key('errors')
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response).to have_key(:errors)
       end
     end
   end
