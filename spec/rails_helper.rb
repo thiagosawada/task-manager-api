@@ -21,7 +21,10 @@ require 'database_cleaner'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+
+# Descomentei para carregar os arquivos dentro da pasta support
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -42,6 +45,9 @@ RSpec.configure do |config|
 
   # Com isso em vez de escrever FactoryGirl.build, eu posso escrever só build
   config.include FactoryGirl::Syntax::Methods
+
+  # Para carregar o module que eu criei dentro dos testes
+  config.include RequestSpecHelper, type: :request # Eu só quero carregar esse módulo quando estiver fazendo testes do tipo :request
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
