@@ -61,9 +61,14 @@ RSpec.describe User, type: :model do
 
   # Para testas métodos de instância é preciso utilizar '#'
   describe '#info' do
-    it 'returns email and created_at' do
+    it 'returns email, created_at and a token' do
       user.save!
-      expect(user.info).to eq("#{user.email} - #{user.created_at}")
+
+      # Quando chamar o método friendly_token do Devise, retorne o que eu vou passar
+      allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
+
+      # Mock é um objeto dublê
+      expect(user.info).to eq("#{user.email} - #{user.created_at} - Token: abc123xyzTOKEN")
     end
   end
 
