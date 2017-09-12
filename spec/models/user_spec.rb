@@ -72,4 +72,29 @@ RSpec.describe User, type: :model do
     end
   end
 
+  # A exclamação significa que o método vai alterar o estado, algum atributo do objeto
+  describe '#generate_authentication_token!' do
+    it 'generates a unique auth token' do
+      allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
+      user.generate_authentication_token!
+
+      expect(user.auth_token).to eq('abc123xyzTOKEN')
+
+    end
+
+    it 'generates another token when the current auth token has already been taken' do
+
+        # Quando o friendly_token é chamado da primeira vez, ele retorna o abc123... e na segunda ABCxyz...
+        allow(Devise).to receive(:friendly_token).and_return('abc123TOKENxyz', 'abc123TOKENxyz', 'ABCxyz123456789')
+
+        # O friendly_token vai gerar na primeira e na segunda vez o mesmo token.
+
+        existing_user = create(:user) # Gerou o token pela primeira vez
+
+        user.generate_authentication_token! # Gerou o mesmo token pela segunda vez e depois gerar um novo
+
+        expect(user.auth_token).not_to eq(existing_user.auth_token)
+    end
+  end
+
 end
