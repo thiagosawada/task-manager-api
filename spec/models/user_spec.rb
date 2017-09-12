@@ -64,10 +64,10 @@ RSpec.describe User, type: :model do
     it 'returns email, created_at and a token' do
       user.save!
 
-      # Quando chamar o método friendly_token do Devise, retorne o que eu vou passar
+      # Mock é um objeto dublê
+      # Quando chamar o método friendly_token do Devise, retorne o que eu vou passar 'abc123xyzTOKEN'
       allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
 
-      # Mock é um objeto dublê
       expect(user.info).to eq("#{user.email} - #{user.created_at} - Token: abc123xyzTOKEN")
     end
   end
