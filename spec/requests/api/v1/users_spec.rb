@@ -76,11 +76,9 @@ RSpec.describe 'Users API', type: :request do
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
-
       end
 
       it 'returns json data for the created user' do
-
         expect(json_body[:email]).to eq(user_params[:email])
       end
     end
@@ -114,7 +112,6 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns the json data for the updated user' do
-
         expect(json_body[:email]).to eq(user_params[:email])
       end
     end
@@ -128,7 +125,6 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'return the json data for the errors' do
-
         expect(json_body).to have_key(:errors)
       end
     end

@@ -57,6 +57,14 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_confirmation_of(:password) }
   # Validar formato de email
   it { is_expected.to allow_value('email@email.com').for(:email) }
+  it { is_expected.to validate_uniqueness_of(:auth_token) }
 
+  # Para testas métodos de instância é preciso utilizar '#'
+  describe '#info' do
+    it 'returns email and created_at' do
+      user.save!
+      expect(user.info).to eq("#{user.email} - #{user.created_at}")
+    end
+  end
 
 end
